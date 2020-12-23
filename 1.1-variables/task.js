@@ -6,10 +6,12 @@
  */
 
 function averageMark(a, g, p) {
-	
-    // реализуйте здесь задание №1
+	let algebra = a;
+	let geography = g;
+	let physics = p;
     
-	return // ваш ответ;
+    
+	return (a + g + p) / 3;
 }
 
 function sayHello(userName) {
