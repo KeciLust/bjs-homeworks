@@ -16,9 +16,9 @@ function averageMark(a, g, p) {
 
 function sayHello(userName) {
 	
-    // реализуйте здесь задание №2
+    let myName = userName;
     
-	return // ваш ответ;
+	return `Привет мир! Меня зовут ${myName}`;
 }
 
 function calculateFormula() {
