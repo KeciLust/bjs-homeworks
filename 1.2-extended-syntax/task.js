@@ -1,6 +1,14 @@
 function getResult(a,b,c){
-    // код для задачи №1 писать здесь
-    // return x;
+    "use strict";
+    let d = b** - 4 * a * c;
+    let x = [];
+    if ( d > 0) {
+        x[0] = ( -b - Math.SQRT(b** - 4 * a * c)) / 2 * a;
+        x[1] = ( -b + Math.SQRT(b** - 4 * a * c)) / 2 * a;
+    } else if ( d === 0) {
+        x[0] = ( -b)/ 2 * a;
+    }     
+      return x;
 }
 
 function getAverageMark(marks){
