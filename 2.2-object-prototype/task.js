@@ -1,14 +1,13 @@
 "use strict";
-//String.prototype.isPalindrome - для задачи №1
-String.prototype = isPalindrome();
 
-function isPalindrome(string) {
+String.prototype.isPalindrome = function isPalindrome() {
+    const str = this;
     let backString = "";
-    string = string.toUpperCase();
-    for (let i = string.length; i > 0; i--) {
-        backString += string[i];
+    let stringCase = str.toUpperCase();
+    for (let i = str.length - 1; i > -1; i--) {
+        backString += stringCase[i];
     }
-    if (string === backString) {
+    if (stringCase === backString) {
         return true;
     } else {
         return false;
@@ -17,28 +16,24 @@ function isPalindrome(string) {
 }
 
 function getAverageMark(marks) {
-    let mark = 0;
+    let marksSummary = 0;
     if (marks.length === 0) {
-        return averageMark = 0;
+        return 0;
     } else {
         for (let i = 0; i < marks.length; i++) {
-            mark += marks[i];
+            marksSummary += marks[i];
         }
-        let average = mark / marks.length;
-        let averageMark = Math.round(average);
+        const average = marksSummary / marks.length;
+        const averageMark = Math.round(average);
 
-        return averageMark
+        return averageMark;
     }
 }
 
 function checkBirthday(birthday) {
     let now = Date.now();
-    birthday = new Date(birthday);
-    let diff = now - birthday.getTime();
+    const parsedBirthday = new Date(birthday).getTime();
+    let diff = now - parsedBirthday;
     let age = diff / (((365 * 24) + 6) * 60 * 60 * 1000)
-    let verdict;
-if ( age >= 18) {
-    return true;
-}
-    return false;
+    return age >= 18;
 }
