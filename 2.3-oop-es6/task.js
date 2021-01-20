@@ -81,6 +81,7 @@ class Library {
         let book = this.findBookBy("name", bookName);
         console.log(book);
         this.books.splice(this.books.indexOf(book));
+        return book;
     }
 }
 class StudentLog {
