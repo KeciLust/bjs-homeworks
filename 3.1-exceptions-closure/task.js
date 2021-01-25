@@ -45,4 +45,3 @@ function getTriangle(a, b, c) {
         }
     }
 }
-}
