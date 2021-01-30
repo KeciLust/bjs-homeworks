@@ -2,8 +2,7 @@ console.clear();
 const weapons = [new Knife(), new Staff(), new Axe(), new StormStaff(), new LongBow(), new Bow()];
 
 function getNames() {
-  const nameWeapons = weapons.map(weapon => weapon.name);
-  return nameWeapons;
+  return weapons.map(weapon => weapon.name);
 }
 
 function getCountReliableWeapons(durability) {
@@ -16,17 +15,13 @@ function hasReliableWeapons(durability) {
 }
 
 function getReliableWeaponsNames(durability) {
-  const durabilityWeapons = weapons.filter(weapon => weapon.durability > durability)
+  return weapons.filter(weapon => weapon.durability > durability)
     .map(weapon => weapon.name);
-  return durabilityWeapons;
-
 }
 
 function getTotalDamage() {
-  const totalDamage = weapons.reduce((sum, weapon) => {
-    return sum + weapon.attack;
-  }, 0);
-  return totalDamage;
+  return weapons.reduce((sum, weapon) => sum + weapon.attack, 0);
+
 }
 
 // Необязательное задание  --------
@@ -35,15 +30,12 @@ function getTotalDamage() {
 function getValuestCountToSumValues(arr, value) {
   const totalDmage = arr.reduce((sumNumber, number, ) => {
     if (sumNumber.sum < value) {
-      sumNumber = {
-        sum: sumNumber.sum + number,
-        i: sumNumber.i + 1
+      {
+        sumNumber.sum += number;
+        sumNumber.i++;
       }
     } else {
-      sumNumber = {
-        sum: sumNumber.sum + number,
-        i: sumNumber.i
-      }
+      sumNumber;
     }
     return sumNumber;
   }, {
@@ -62,37 +54,28 @@ function getValuestCountToSumValues(arr, value) {
 
 
 function compareArrays(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
-
-  function isEven(number, index) {
-    return number === arr2[index];
-  }
-  return arr1.every(isEven);
+  return arr1.every((number, index) =>
+    number === arr2[index] && arr1.length === arr2.length);
 }
+
+
 
 function memorize(fn, limit) {
-  function optiFn() {
-    const memory = [];
+  const memory = [];
+
+  return function (...array) {
     const arr = {};
-    arr.result = 0;
-    arr.args = Array.from(arguments);
-    const ar = memory.find(ar => compareArrays(ar.args, arr.args))
-    if (ar.args === undefined) {
-      if (memory.length >= limit) {
-        memory.shift();
-        memory.push(ar);
-      } else {
-        memory.push(ar);
-      }
-      return fn();
-    } else {
-      return ar.result;
+    arr.args = array;
+    const needArr = memory.find(ar => compareArrays(ar.args, arr.args))
+    if (needArr) {
+      return needArr.result;
     }
+    arr.result = fn(...array);
+    memory.push(arr);
 
+    if (memory.length >= limit + 1) {
+      memory.shift();
+    }
+    return arr.result;
   }
-  return optiFn();
-
 }
-
