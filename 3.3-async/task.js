@@ -1,7 +1,7 @@
 class AlarmClock {
     constructor(alarmCollection, timerId) {
         this.alarmCollection = [];
-        this.timerId = timerId;
+        this.timerId = null;
     }
     addClock(time, fn, id) {
         if (id === undefined) {
@@ -35,26 +35,26 @@ class AlarmClock {
         return `${h}:${m}`;
     }
     start() {
-        function checClock() {
-            if (alarm.time === getCurrentFormattedTime()) {
+        const checClock = (alarm) => {
+            if (alarm.time === this.getCurrentFormattedTime()) {
                 return alarm.callback();
             }
         }
-        if (this.timerId === undefined) {
-            return this.timerId = setInterval(this.alarmCollection.forEach(alarm => checClock(alarm)));
+        if (this.timerId === null) {
+            return this.timerId = setInterval(() => this.alarmCollection.forEach(alarm => checClock(alarm)), 1000);
         }
     }
     stop() {
-        if (this.timerId !== undefined) {
+        if (this.timerId !== null) {
             clearInterval(this.timerId);
-            return this.timerId = undefined;
+            return this.timerId = null;
         }
     }
     printAlarms() {
         this.alarmCollection.forEach(alarm => console.log(alarm.id, alarm.time));
     }
     clearAlarms() {
-        stop();
+        this.stop();
         return this.alarmCollection = [];
     }
 
